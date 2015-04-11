@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="row">
+
+        <div class="row">
+            <div class="large-12 columns">
+                <h3>{{descripcion.description}}</h3>
+            </div>
+        </div>
+
+        <div class="large-4 columns">
+
+            <img src="{{descripcion.image}}">
+
+            <div class="hide-for-small panel">
+                <h5>Descripción del Producto</h5>
+                <hr />
+
+            </div>
+        </div>
+        <div class="large-4 columns">
+            <strong>{{descripcion.brand.name}}</strong><hr />
+            <h6>Precio:</h6>
+            <br />
+            <strong>{{formatoMoneda(descripcion.price)}}</strong><hr />
+        </div>
+        <div class="large-4 columns">
+            
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label><strong>
+                            Cantidad
+                            </strong>
+        <input type="text" id="cantidad" ng-model="cantidad"  value ="1" numbers-only="numbers-only" />
+                        </label>
+                    </div>
+                </div>
+               
+            
+            <button class="btn btn-info btn-block" ng-click="agregar(descripcion)">
+                <i class="icon-plus-sign"></i>
+                           Agregar al Carrito
+                        </button>
+        </div>
+        <div>
+
+            <div class="row">
+                <div class="large-12 columns ">
+                    <div class="hide-for-small panel" ng-bind-html="html">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,84 @@
+﻿<!doctype html>
+<html class="no-js" lang="es" ng-app="MiCarrito">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examén Tienda Angular</title>
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <script src="js/libs/vendor/modernizr.js"></script>
+</head>
+<body ng-controller="mainController">
+
+    <div class="row">
+        <div class="large-12 columns">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1>Mercado Compra
+                                
+                        </h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Carrito</span></a></li>
+
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <a class="button" data-dropdown="contentDrop" aria-controls="contentDrop" aria-expanded="false">Mi Carrito - {{sumaTotal()}}</a> 
+            <div id="contentDrop" class="f-dropdown content medium" data-dropdown-content aria-hidden="true" tabindex="-1" >
+                <table class="table table-striped">
+                    <caption>Tienes {{cantidadTotal()}} articulos en tu carrito</caption>
+                    <thead>
+                        <tr>
+                            <th class="span">Id</th>
+                            <th class="span">Producto</th>
+                            <th class="span">Cantidad</th>
+                            <th class="span">Precio</th>
+                            <th class="span">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="well" ng-repeat="item in carrito">
+                            <td><img class="" title="{{producto.description}}"
+                                    src="{{producto.image}}" /></td>
+                            <td>{{item.Producto.description}}</td>
+                            <td>
+                                <input type="text" ng-model="item.Cantidad" />
+                            </td>
+                            <td>{{formatoMoneda(item.Producto.price)}}</td>
+                            <td>{{formatoMoneda(item.Cantidad * item.Producto.price)}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><a href="#/resumen/" ng-click="saveCarrito()"><button class="btn btn-info btn-block">
+                <i class="icon-plus-sign"></i>
+                           Comprar
+                        </button></a></td>
+                            <td>{{sumaTotal()}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div ng-view></div>
+    <script src="js/libs/vendor/jquery.js"></script>
+    <script src="js/libs/foundation.min.js"></script>
+    <script src="js/libs/foundation/foundation.dropdown.js"></script>
+    <script src="js/libs/angular.min.js"></script>
+    <script src="js/libs/angular-route.min.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    <script src="js/controllers/catalogoController.js"></script>
+    <script src="js/controllers/descripcionController.js"></script>
+    <script src="js/controllers/resumenController.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+</html>

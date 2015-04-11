@@ -1,0 +1,62 @@
+﻿<div class="row">
+    <div class="large-12 columns">
+
+        <article>
+
+            <h2>Mi Carrito de Compras</h2>
+            <table class="table table-striped">
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th class="span">Producto</th>
+                        <th class="span"></th>
+                        <th class="span">Cantidad</th>
+                        <th class="span">Precio</th>
+                        <th class="span">Total</th>
+                        <th class="span">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr class="well" ng-repeat="item in carrito">
+                        <td>
+                            <div>
+                                <img class="" title="{{item.producto.description}}" src="{{item.producto.image}}" />
+                            </div>
+                        </td>
+                        <td>{{item.Producto.description}}</td>
+                        <td>
+                            <input type="text" ng-model="item.Cantidad" />
+                        </td>
+                        <td>{{formatoMoneda(item.Producto.price)}}</td>
+                        <td>{{formatoMoneda(item.Cantidad * item.Producto.price)}}</td>
+                        <td>
+                            <a href="#/" ng-click="eliminar(item.producto)">
+                                <button class="button success">
+                                    <i class="icon-plus-sign"></i>
+                                    Eliminar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><a href="#/">
+                            <button class="button success">
+                                <i class="icon-plus-sign"></i>
+                                Seguir Comprando
+                            </button>
+                        </a></td>
+                        <td><a href="#/resumen/">
+                            <button class="button success">
+                                <i class="icon-plus-sign"></i>
+                                Continuar
+                            </button>
+                        </a></td>
+                        <td>{{sumaTotal()}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </div>
