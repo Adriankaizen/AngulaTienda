@@ -1,3 +1,4 @@
+//Se creo directiva, para vallidar que el usuario no pueda escribir campos alfanumericos ni el Cero en el campo de cantidad
 miCarrito.directive('numbersOnly', function () {
     return {
         require: 'ngModel',
@@ -19,19 +20,16 @@ miCarrito.directive('numbersOnly', function () {
     };
 });
 miCarrito.controller('descripcionController', function descripcionController($scope, $http, $routeParams, $sce) {
-  //  $scope.message = 'Everyone come and see how good I look!';
     $scope.cantidad = 1;
     $scope.agregar = function (p) {
         $scope.$emit('to_parent', p);
     }
-
+    //Servicio que obtiene la descripcion del articulo seleccionado
     $http({
         method: 'GET',
         url: 'http://api.ecommerce.next-cloud.mx/v1.0/demo.next-cloud.mx/products/' + $routeParams.sku,
         params: '',
     }).success(function (data) {
-        console.log(data);
-
         $scope.descripcion = data;
         $scope.html = $sce.trustAsHtml($scope.descripcion.review);
     }).error(function () {

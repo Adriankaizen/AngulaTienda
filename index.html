@@ -46,7 +46,7 @@
                                     src="{{producto.image}}" /></td>
                             <td>{{item.Producto.description}}</td>
                             <td>
-                                <input type="text" ng-model="item.Cantidad" />
+                                <input type="text" ng-model="item.Cantidad" numbers-only="numbers-only" readonly="readonly" />
                             </td>
                             <td>{{formatoMoneda(item.Producto.price)}}</td>
                             <td>{{formatoMoneda(item.Cantidad * item.Producto.price)}}</td>
@@ -73,6 +73,7 @@
     <script src="js/libs/foundation/foundation.dropdown.js"></script>
     <script src="js/libs/angular.min.js"></script>
     <script src="js/libs/angular-route.min.js"></script>
+    <script src="js/libs/angular-pagination.js"></script>
     <script src="js/controllers/mainController.js"></script>
     <script src="js/controllers/catalogoController.js"></script>
     <script src="js/controllers/descripcionController.js"></script>

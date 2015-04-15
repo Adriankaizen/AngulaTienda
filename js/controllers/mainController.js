@@ -21,19 +21,31 @@ miCarrito.config(function ($routeProvider) {
 //Controlador de funcionalidades genericas
 miCarrito.controller('mainController', function mainController($scope) {
     $scope.carrito = [];
-
+    //Almacena articulos comprados en localstorage
     $scope.saveCarrito = function () {
         var source = new Array();
         for (var i = 0; i < $scope.carrito.length; i++) {            
             source[i] = {
-                "descripcion": $scope.carrito[i].Producto.description,
-                "cantidad": $scope.carrito[i].Cantidad,
-                "precio": $scope.carrito[i].Producto.price
+                "description": $scope.carrito[i].Producto.description,
+                "Cantidad": $scope.carrito[i].Cantidad,
+                "price": $scope.carrito[i].Producto.price,
+                "image": $scope.carrito[i].Producto.image
             };           
         }
         
         localStorage.setItem("carrito", JSON.stringify(source));
     }
+    //Actualiza resumen con informacion del localstorage
+    $scope.$on('local', function (event, data) {
+        $scope.carrito = [];
+        for (var i = 0; i < data.length; i++) {
+            $scope.carrito.push({
+                Producto: data[i],
+                Cantidad: data[i].Cantidad
+            });
+        }
+    });
+    //Inserta articulos en el menu del carrito
     $scope.$on('to_parent', function (event, data) {
         var p = data;
         var itemActual;     
@@ -58,12 +70,16 @@ miCarrito.controller('mainController', function mainController($scope) {
         }
 
     });
-
+    //Formatea el precio a tipo money
     $scope.formatoMoneda = function (valor) {
         var valor = parseFloat(valor).toFixed(2);
         return "$ " + valor;
     }
-
+    $scope.actualiza = function () {
+        $scope.sumaTotal();
+        $scope.cantidadTotal();
+    }
+    //Muestra el precio total  de los articulos añadidos al carrito
     $scope.sumaTotal = function () {
         var total = 0;
         for (var i = 0; i < $scope.carrito.length; i++) {
@@ -71,10 +87,11 @@ miCarrito.controller('mainController', function mainController($scope) {
         }
         return "$ " + total.toFixed(2);
     }
+    //Muestra la cantidad total de articulos añadidos al carrito
     $scope.cantidadTotal = function () {
         var cantidad = 0;
         for (var i = 0; i < $scope.carrito.length; i++) {
-            cantidad += cantidad + $scope.carrito[i].Cantidad;
+            cantidad = parseInt(cantidad) + parseInt($scope.carrito[i].Cantidad);
         }
         return cantidad
     }

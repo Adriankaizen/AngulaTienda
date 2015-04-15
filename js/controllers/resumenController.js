@@ -1,13 +1,12 @@
-miCarrito.controller('resumenController', function resumenController($scope) {
-    alert(2);
-    var resumen = localStorage.getItem("carrito");
-    $scope.resumenCarrito = JSON.parse(resumen);
-    console.log($scope.resumenCarrito);
+//Muestra articulos almacenados en localstorage del carrito 
+miCarrito.controller('resumenController', function resumenController($scope) { 
+  //Accion boton agregar carrito 
+    var resumen = JSON.parse(localStorage.getItem("carrito"));
+    $scope.$emit('local', resumen);
 
-    $scope.eliminar = function (p) {
-        alert(p);
-        $scope.$emit('to_parent', p);
-    }
-
+//Elimina articuloseleccionado del resumen 
+    $scope.eliminar = function (index) {
+        $scope.carrito.splice(index, 1);
+    };
 
 });

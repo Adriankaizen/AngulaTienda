@@ -21,22 +21,22 @@
                     <tr class="well" ng-repeat="item in carrito">
                         <td>
                             <div>
-                                <img class="" title="{{item.producto.description}}" src="{{item.producto.image}}" />
+                                <img class="" title="{{item.Producto.description}}" src="{{item.Producto.image}}" />
                             </div>
                         </td>
                         <td>{{item.Producto.description}}</td>
                         <td>
-                            <input type="text" ng-model="item.Cantidad" />
+                            <input type="text" ng-model="item.Cantidad" ng-keypress="actualiza()" />
                         </td>
                         <td>{{formatoMoneda(item.Producto.price)}}</td>
                         <td>{{formatoMoneda(item.Cantidad * item.Producto.price)}}</td>
                         <td>
-                            <a href="#/" ng-click="eliminar(item.producto)">
-                                <button class="button success">
+                           
+                                <button class="button success" ng-click="eliminar($index)">
                                     <i class="icon-plus-sign"></i>
                                     Eliminar
                                 </button>
-                            </a>
+                           
                         </td>
                     </tr>
                     <tr>
@@ -54,7 +54,7 @@
                                 Continuar
                             </button>
                         </a></td>
-                        <td>{{sumaTotal()}}</td>
+                        <td ng-model="total">{{sumaTotal()}}</td>
                     </tr>
                 </tbody>
             </table>
